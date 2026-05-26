@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>SecureAccess — Alterar Senha</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Segoe UI', sans-serif; background: #0f172a; display: flex; align-items: center; justify-content: center; min-height: 100vh; color: #e2e8f0; }
+        .card { background: #1e293b; border: 1px solid #334155; border-radius: 12px; padding: 40px; width: 400px; }
+        h1 { font-size: 1.4rem; margin-bottom: 24px; }
+        label { display: block; font-size: 0.8rem; color: #94a3b8; margin-bottom: 6px; }
+        input { width: 100%; padding: 10px 14px; background: #0f172a; border: 1px solid #334155; border-radius: 8px; color: #e2e8f0; margin-bottom: 16px; }
+        input:focus { outline: none; border-color: #3b82f6; }
+        button { width: 100%; padding: 12px; background: #7c3aed; border: none; border-radius: 8px; color: #fff; font-size: 1rem; cursor: pointer; }
+        .erro { background: #7f1d1d; color: #fca5a5; padding: 10px; border-radius: 8px; margin-bottom: 16px; font-size: 0.85rem; }
+        .sucesso { background: #14532d; color: #86efac; padding: 10px; border-radius: 8px; margin-bottom: 16px; font-size: 0.85rem; }
+        .back { text-align: center; margin-top: 16px; font-size: 0.85rem; }
+        .back a { color: #3b82f6; text-decoration: none; }
+    </style>
+</head>
+<body>
+<div class="card">
+    <h1>🔑 Alterar Senha</h1>
+    <div th:if="${erro}" class="erro" th:text="${erro}"></div>
+    <div th:if="${sucesso}" class="sucesso" th:text="${sucesso}"></div>
+    <form th:action="@{/alterar-senha}" method="post">
+        <label>Login</label>
+        <input type="text" name="login" required>
+        <label>Senha Atual</label>
+        <input type="password" name="senhaAtual" required>
+        <label>Nova Senha</label>
+        <input type="password" name="novaSenha" placeholder="10-12 chars com letras, nums e símbolos" required>
+        <button type="submit">Alterar Senha</button>
+    </form>
+    <div class="back"><a th:href="@{/dashboard}">← Voltar ao Dashboard</a></div>
+</div>
+</body>
+</html>

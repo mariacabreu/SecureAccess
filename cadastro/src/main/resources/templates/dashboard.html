@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>SecureAccess — Dashboard</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Segoe UI', sans-serif; background: #0f172a; color: #e2e8f0; min-height: 100vh; }
+        header { background: #1e293b; border-bottom: 1px solid #334155; padding: 16px 32px; display: flex; justify-content: space-between; align-items: center; }
+        header h1 { font-size: 1.2rem; }
+        .badge { background: #1d4ed8; padding: 4px 12px; border-radius: 20px; font-size: 0.75rem; }
+        .badge.admin { background: #7c3aed; }
+        .badge.gerente { background: #0891b2; }
+        main { padding: 48px 32px; max-width: 800px; margin: 0 auto; }
+        .welcome { font-size: 1.8rem; margin-bottom: 8px; }
+        .sub { color: #64748b; margin-bottom: 40px; }
+        .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+        .card { background: #1e293b; border: 1px solid #334155; border-radius: 10px; padding: 20px; }
+        .card h3 { font-size: 0.85rem; color: #94a3b8; margin-bottom: 8px; }
+        .card p { font-size: 1.1rem; font-weight: 600; }
+        nav { margin-top: 40px; display: flex; gap: 12px; }
+        a.btn { padding: 10px 20px; border-radius: 8px; text-decoration: none; font-size: 0.9rem; }
+        .btn-blue { background: #1d4ed8; color: #fff; }
+        .btn-red  { background: #991b1b; color: #fff; }
+    </style>
+</head>
+<body>
+<header>
+    <h1>🔐 SecureAccess</h1>
+    <span class="badge"
+          th:classappend="${usuario.nivel.name() == 'ADMIN'} ? 'admin' : (${usuario.nivel.name() == 'GERENTE'} ? 'gerente' : '')"
+          th:text="${usuario.nivel}">CLIENTE</span>
+</header>
+<main>
+    <p class="welcome">Olá, <span th:text="${usuario.nome}">Usuário</span>! 👋</p>
+    <p class="sub">Login: <span th:text="${usuario.login}"></span> | E-mail: <span th:text="${usuario.email}"></span></p>
+
+    <div class="cards">
+        <div class="card">
+            <h3>Nível de Acesso</h3>
+            <p th:text="${usuario.nivel}">CLIENTE</p>
+        </div>
+        <div class="card">
+            <h3>Status da Conta</h3>
+            <p>✅ Ativa</p>
+        </div>
+        <div class="card">
+            <h3>Tentativas Inválidas</h3>
+            <p th:text="${usuario.tentativasInvalidas}">0</p>
+        </div>
+    </div>
+
+    <nav>
+        <a th:href="@{/alterar-senha}" class="btn btn-blue">🔑 Alterar Senha</a>
+        <a th:href="@{/logout}" class="btn btn-red">⬅ Sair</a>
+    </nav>
+</main>
+</body>
+</html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>SecureAccess — Cadastro</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: #0f172a;
+            display: flex; align-items: center; justify-content: center;
+            min-height: 100vh; color: #e2e8f0;
+        }
+        .card {
+            background: #1e293b; border: 1px solid #334155;
+            border-radius: 12px; padding: 40px; width: 420px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+        }
+        h1 { font-size: 1.5rem; margin-bottom: 6px; color: #f1f5f9; }
+        .subtitle { font-size: 0.85rem; color: #94a3b8; margin-bottom: 24px; }
+        label { display: block; font-size: 0.8rem; color: #94a3b8; margin-bottom: 6px; }
+        input, select {
+            width: 100%; padding: 10px 14px;
+            background: #0f172a; border: 1px solid #334155;
+            border-radius: 8px; color: #e2e8f0; font-size: 0.95rem;
+            margin-bottom: 16px;
+        }
+        input:focus, select:focus { outline: none; border-color: #3b82f6; }
+        .hint { font-size: 0.75rem; color: #64748b; margin-top: -12px; margin-bottom: 14px; }
+        button {
+            width: 100%; padding: 12px;
+            background: #10b981; border: none;
+            border-radius: 8px; color: #fff; font-size: 1rem; cursor: pointer;
+        }
+        button:hover { background: #059669; }
+        .erro { background: #7f1d1d; color: #fca5a5; padding: 10px; border-radius: 8px; margin-bottom: 16px; font-size: 0.85rem; }
+        .link { text-align: center; margin-top: 16px; font-size: 0.85rem; }
+        .link a { color: #3b82f6; text-decoration: none; }
+    </style>
+</head>
+<body>
+<div class="card">
+    <h1>✍️ Cadastro de Usuário</h1>
+    <p class="subtitle">SecureAccess Systems — RF01</p>
+
+    <div th:if="${erro}" class="erro" th:text="${erro}"></div>
+
+    <form th:action="@{/cadastro}" method="post">
+        <label for="nome">Nome completo</label>
+        <input id="nome" type="text" name="nome" placeholder="João da Silva" required>
+
+        <label for="login">Login</label>
+        <input id="login" type="text" name="login" placeholder="joao.silva" required>
+
+        <label for="email">E-mail</label>
+        <input id="email" type="email" name="email" placeholder="joao@empresa.com" required>
+
+        <label for="senha">Senha</label>
+        <input id="senha" type="password" name="senha" placeholder="Min. 10, máx. 12 caracteres" required>
+        <p class="hint">Use letras, números e caracteres especiais: !@#$%&*()</p>
+
+        <label for="nivel">Nível de acesso</label>
+        <select id="nivel" name="nivel">
+            <option value="CLIENTE">Cliente</option>
+            <option value="GERENTE">Gerente</option>
+            <option value="ADMIN">Admin</option>
+        </select>
+
+        <button type="submit">Cadastrar</button>
+    </form>
+
+    <div class="link">
+        Já tem conta? <a th:href="@{/login}">Entrar</a>
+    </div>
+</div>
+</body>
+</html>

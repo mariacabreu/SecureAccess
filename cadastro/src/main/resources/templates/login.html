@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>SecureAccess — Login</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: #0f172a;
+            display: flex; align-items: center; justify-content: center;
+            min-height: 100vh; color: #e2e8f0;
+        }
+        .card {
+            background: #1e293b;
+            border: 1px solid #334155;
+            border-radius: 12px;
+            padding: 40px;
+            width: 380px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+        }
+        h1 { font-size: 1.6rem; margin-bottom: 6px; color: #f1f5f9; }
+        .subtitle { font-size: 0.85rem; color: #94a3b8; margin-bottom: 28px; }
+        label { display: block; font-size: 0.8rem; color: #94a3b8; margin-bottom: 6px; }
+        input {
+            width: 100%; padding: 10px 14px;
+            background: #0f172a; border: 1px solid #334155;
+            border-radius: 8px; color: #e2e8f0; font-size: 0.95rem;
+            margin-bottom: 18px;
+        }
+        input:focus { outline: none; border-color: #3b82f6; }
+        button {
+            width: 100%; padding: 12px;
+            background: #3b82f6; border: none;
+            border-radius: 8px; color: #fff;
+            font-size: 1rem; cursor: pointer;
+        }
+        button:hover { background: #2563eb; }
+        .erro { background: #7f1d1d; color: #fca5a5; padding: 10px; border-radius: 8px; margin-bottom: 16px; font-size: 0.85rem; }
+        .sucesso { background: #14532d; color: #86efac; padding: 10px; border-radius: 8px; margin-bottom: 16px; font-size: 0.85rem; }
+        .link { text-align: center; margin-top: 16px; font-size: 0.85rem; }
+        .link a { color: #3b82f6; text-decoration: none; }
+    </style>
+</head>
+<body>
+<div class="card">
+    <h1>🔐 SecureAccess</h1>
+    <p class="subtitle">Sistema de Autenticação Corporativa</p>
+
+    <div th:if="${erro}" class="erro" th:text="${erro}"></div>
+    <div th:if="${sucesso}" class="sucesso" th:text="${sucesso}"></div>
+
+    <form th:action="@{/login}" method="post">
+        <label for="login">Login</label>
+        <input id="login" type="text" name="login" placeholder="seu.login" required>
+
+        <label for="senha">Senha</label>
+        <input id="senha" type="password" name="senha" placeholder="••••••••••" required>
+
+        <button type="submit">Entrar</button>
+    </form>
+
+    <div class="link">
+        Não tem conta? <a th:href="@{/cadastro}">Cadastre-se</a>
+    </div>
+</div>
+</body>
+</html>
